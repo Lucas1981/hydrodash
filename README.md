@@ -1,33 +1,7 @@
-# React + TypeScript + Vite
+# Hydrodash
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+<img width="1470" height="705" alt="Screenshot 2026-10-02 at 16 47 44" src="https://github.com/user-attachments/assets/274d6cc1-4403-4dcf-a636-a564b008ba68" />
 
-Currently, two official plugins are available:
+This is a very simple Vibe Engineered example of how to build a simple dashboard making use of real-time data coming in through websockets. It makes use of React to display the app, uses D3.js to take care of the data visualization elements. The data right now is mock data, where our `server.js` file just adds random new data points every second, keeping the stream displayed fresh to illustrate the dynamic nature of the app.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
-# hydrodash
+To run this app locally, first install the dependencies with `$npm i` on the root dir, theb run `$ node server.js` and in another tab run `$ npm run dev` to bring up the dashboard.
