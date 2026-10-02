@@ -44,9 +44,7 @@ export default function DonutChart({ data, height = 300 }: DonutChartProps) {
       .attr('d', arc)
       .attr('fill', (_, i) => COLORS[i % COLORS.length])
 
-    const legend = svg
-      .append('g')
-      .attr('transform', `translate(16, ${height / 2 - (data.length * 22) / 2})`)
+    const legend = svg.append('g').attr('transform', 'translate(16, 16)')
 
     data.forEach((segment, i) => {
       const row = legend.append('g').attr('transform', `translate(0, ${i * 22})`)

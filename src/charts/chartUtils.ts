@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 
-export const MARGIN = { top: 20, right: 20, bottom: 70, left: 60 }
+export const MARGIN = { top: 20, right: 20, bottom: 85, left: 60 }
 
 export function niceMax(values: number[]) {
   const max = d3.max(values) ?? 0
@@ -41,7 +41,7 @@ export function drawCartesianAxes({
 
   g.append('text')
     .attr('x', innerWidth / 2)
-    .attr('y', innerHeight + 55)
+    .attr('y', innerHeight + 72)
     .attr('text-anchor', 'middle')
     .attr('fill', 'currentColor')
     .attr('font-size', 12)

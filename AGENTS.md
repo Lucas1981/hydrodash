@@ -1,6 +1,13 @@
 # Hydrodash
 
-This will be a test app to see how we might visualize data that Hydromancer typically might use. We will build it up like this:
+A proof-of-concept app for visualizing data that Hydromancer typically might use. Backend and frontend live in a single repo root.
+
+## Running the app
+
+- `npm start` — mock backend on port `3001`
+- `npm run dev` — Vite frontend (default port `5173`)
+
+Both must be running for live charts.
 
 ## A mock backend
 
@@ -10,9 +17,9 @@ This will be a test app to see how we might visualize data that Hydromancer typi
 
 ### Backend implementation notes
 
-- Run with `npm start` (port `3001`).
-- REST API via json-server at `/api` (static metadata in `db.json`).
-- WebSocket on the same port. Messages: `{ type: 'init' | 'update', data: { barChart, lineChart, donutChart } }`.
+- `server.js` — json-server + WebSocket on port `3001`.
+- REST API at `/api` (static metadata in `db.json`).
+- WebSocket messages: `{ type: 'init' | 'update', data: { barChart, lineChart, donutChart } }`.
 - `barChart`: single series of 12 `{ label, value }` points.
 - `lineChart`: two series (`Revenue`, `Costs`), each with 12 points.
 - `donutChart`: three segments (`Product A/B/C`) with shifting values.
@@ -32,5 +39,18 @@ The extra specifications for the line and bar charts are also:
 - [x] Axes should show the nice max and 0 of the values. They should be agnostic, so we must specify what they represent with labels that we specify. We can just use money and time for our example app. We want to tick the axes and also have the x-axis labels be tilted 45 degrees for legibility.
 - [x] The charts should be able to update realtime.
 - [x] On the line chart, we want to be able to plot more than one line, and we want the option to display a legend next to it, be it optionally.
+
+### Frontend implementation notes
+
+- Vite + React + TypeScript. Entry: `src/main.tsx`, shell: `src/App.tsx` (header only).
+- `src/Dashboard.tsx` — connects to `ws://localhost:3001` via the native `WebSocket` API (not Axios; Axios is HTTP-only).
+- Chart components in `src/charts/`:
+  - `BarChart.tsx` — single series, hover tooltip, configurable `xLabel` / `yLabel`.
+  - `LineChart.tsx` — multiple series via `Record<string, ChartPoint[]>`, optional `showLegend`.
+  - `DonutChart.tsx` — segment ratios with side legend.
+  - `chartUtils.ts` — shared margins, axis drawing, `niceMax` y-domain.
+  - `ChartTooltip.tsx` — fixed-position hover popup for bar/line charts.
+- Shared types in `src/types.ts`. Charts re-render on each WebSocket `update`.
+- Example axis labels in use: `Time` (x), `Money ($)` (y).
 
 We want to keep all of this very concise and clean, not using more code than we need to. Do not go optimize for errors that we don't expect. We want to keep this on a very small proof-of-concept level for now.
