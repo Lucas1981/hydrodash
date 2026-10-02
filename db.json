@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "name": "Hydrodash mock API",
+    "windowSize": 12,
+    "tickIntervalMs": 1000
+  }
+}
